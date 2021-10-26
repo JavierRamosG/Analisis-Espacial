@@ -1,2 +1,2 @@
-# Analisis-Espacial
+# Análisis Espacial
 Por *Javier Ramos*

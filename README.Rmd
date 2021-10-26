@@ -1,0 +1,27 @@
+---
+title: "Prueba 1 - Javier Ramos"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+##Pregunta A
+###Desarrollo:
+
+
+##Pregunta B
+
+##Pregunta C
+
+##Pregunta D
+
+##Pregunta E
+
+##Pregunta F
+
+##Pregunta G
+
+##Pregunta H
+
+##Pregunta I

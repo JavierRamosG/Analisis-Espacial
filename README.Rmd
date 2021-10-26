@@ -6,22 +6,22 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-##Pregunta A
-###Desarrollo:
+## Pregunta A
+### Desarrollo:
 
 
-##Pregunta B
+## Pregunta B
 
-##Pregunta C
+## Pregunta C
 
-##Pregunta D
+## Pregunta D
 
-##Pregunta E
+## Pregunta E
 
-##Pregunta F
+## Pregunta F
 
-##Pregunta G
+## Pregunta G
 
-##Pregunta H
+## Pregunta H
 
-##Pregunta I
+## Pregunta I

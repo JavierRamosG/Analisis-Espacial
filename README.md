@@ -1,20 +1,22 @@
 Prueba 1 - Javier Ramos
 ================
 
-\#\#Pregunta A \#\#\#Desarrollo:
+## Pregunta A
 
-\#\#Pregunta B
+### Desarrollo:
 
-\#\#Pregunta C
+## Pregunta B
 
-\#\#Pregunta D
+## Pregunta C
 
-\#\#Pregunta E
+## Pregunta D
 
-\#\#Pregunta F
+## Pregunta E
 
-\#\#Pregunta G
+## Pregunta F
 
-\#\#Pregunta H
+## Pregunta G
 
-\#\#Pregunta I
+## Pregunta H
+
+## Pregunta I

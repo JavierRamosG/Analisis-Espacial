@@ -16,6 +16,10 @@ df = read.table(file = "data.txt", header = TRUE)
 
 #Librerías
 library(mapproj)
+#library(devtools)
+library(fields)
+library(geoR)
+library(GeoModels)
 ```
 
 
@@ -40,10 +44,21 @@ rownames(df2) <- 1:nrow(df2)
 #df2
 ```
 
-
-
 ## Pregunta B
 ### Desarrollo:
+
+Primero se realizará la simulación a través del modelo de Matern
+```{r}
+var = 1
+media = 0
+nugget = 0
+smooth = 0.5
+scale = 0.1
+
+param=list(smooth=smooth,mean=0,sill=1,scale=scale_mat,nugget=0) 
+data1 <- GeoSim(coordx=coords, corrmodel="Matern", param=param)$data
+```
+
 
 ## Pregunta C
 ### Desarrollo:

@@ -16,7 +16,7 @@ df = read.table(file = "data.txt", header = TRUE)
 
 #Librerías
 library(mapproj)
-#library(devtools)
+library(devtools)
 library(fields)
 library(geoR)
 library(GeoModels)
@@ -49,16 +49,27 @@ rownames(df2) <- 1:nrow(df2)
 
 Primero se realizará la simulación a través del modelo de Matern
 ```{r}
-var = 1
-media = 0
+sill = 1
+mean = 0
 nugget = 0
 smooth = 0.5
 scale = 0.1
 
-param=list(smooth=smooth,mean=0,sill=1,scale=scale_mat,nugget=0) 
-data1 <- GeoSim(coordx=coords, corrmodel="Matern", param=param)$data
+param=list(smooth=smooth,mean=mean,sill=sill,scale=scale,nugget=nugget) 
+data1 <- GeoSim(coordx=df2[,1],coordy = df2[,2], corrmodel="Matern", param=param)$data
 ```
 
+Luego, se procede a realizar un análisis gráfico:
+
+```{r}
+#quilt.plot(df2[,1], df2[,2], data1, xlab="", ylab="", main=paste("Matern",expression(nu),"=",smooth))
+quilt.plot(df2[,1], df2[,2], data1)
+
+hist(data1)
+boxplot(data1)
+```
+
+A partir del boxplot se puede determinar que hay outliers, pero que estos son simétricos. Respecto al histograma, claramente hay un comportamiento de normalidad y respecto al gráfico de colores no se ve con tanta claridad si hay o no una dependencia. Por lo tanto, sí se puede decir que el modelo Gaussiano es adecuado.
 
 ## Pregunta C
 ### Desarrollo:

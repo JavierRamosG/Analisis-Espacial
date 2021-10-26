@@ -20,6 +20,7 @@ library(devtools)
 library(fields)
 library(geoR)
 library(GeoModels)
+library(nortest)
 ```
 
 
@@ -47,32 +48,54 @@ rownames(df2) <- 1:nrow(df2)
 ## Pregunta B
 ### Desarrollo:
 
-Primero se realizará la simulación a través del modelo de Matern
+Primero se realizará un análisis gráfico:
 ```{r}
-sill = 1
-mean = 0
-nugget = 0
-smooth = 0.5
-scale = 0.1
+par(mfrow = c(1,3))
 
-param=list(smooth=smooth,mean=mean,sill=sill,scale=scale,nugget=nugget) 
-data1 <- GeoSim(coordx=df2[,1],coordy = df2[,2], corrmodel="Matern", param=param)$data
+#Histograma
+hist(df2[,3], main = "Histograma", xlab = "Datos",ylab = "Frecuencia")
+
+#Boxplot
+boxplot(df2[,3], main = "Boxplot")
+
+#Gráfico de cuantiles
+qqnorm(df2[,3], pch = 19, col = "gray50", main = "Simetría", xlab = "Cuantiles Teóricos", ylab = "Cuantiles Muestrales")
+qqline(df2[,3])
+```
+En base a lo anterior, se puede ver que los datos podrían seguir una distribución normal. Ahora bien, para ser más precisos, se realizará un test de hipotesis:
+
+```{r}
+lillie.test(df2[,3])
 ```
 
-Luego, se procede a realizar un análisis gráfico:
-
-```{r}
-#quilt.plot(df2[,1], df2[,2], data1, xlab="", ylab="", main=paste("Matern",expression(nu),"=",smooth))
-quilt.plot(df2[,1], df2[,2], data1)
-
-hist(data1)
-boxplot(data1, horizontal = TRUE)
-```
-
-A partir del boxplot se puede determinar que hay outliers, pero que estos son simétricos. Respecto al histograma, claramente hay un comportamiento de normalidad y respecto al gráfico de colores no se ve con tanta claridad si hay o no una dependencia. Por lo tanto, sí se puede decir que el modelo Gaussiano es adecuado.
+El resultado indica que se retiene H0 con un valor-p = 0,002 < 0,05 = alpha. Por lo tanto, los datos distribuyen normal y el modelo Gaussiano sí es adecuado.
 
 ## Pregunta C
 ### Desarrollo:
+
+Primero se calculará la distancia máxima
+```{r}
+points = cbind(df2[,1], df2[,2])
+maxdist = max(dist(points))
+```
+
+Ahora se procede a realizar el análsis del semivariograma
+```{r}
+svario = GeoVariogram(coordx = points, data= df2[,3], maxdist = maxdist/2, numbins = 20)
+plot(svario$centers, svario$variograms, ylim = c(0, 1.5))
+```
+Para poder apreciar mejor la situación, se ampliará el gráfico cerca de cero:
+
+```{r}
+svario = GeoVariogram(coordx = points, data= df2[,3], maxdist = 5, numbins = 10)
+plot(svario$centers, svario$variograms, ylim = c(0, 1))
+```
+
+Análisis de semivariograma en varias direcciones:
+```{r}
+svario2 = variog4(coords = points, data = df2[,3], max.dist = maxdist/2)
+plot(svario2, omni = TRUE)
+```
 
 ## Pregunta D
 ### Desarrollo:
@@ -91,3 +114,25 @@ A partir del boxplot se puede determinar que hay outliers, pero que estos son si
 
 ## Pregunta I
 ### Desarrollo:
+
+Primero se realizará la simulación a través del modelo de Matern
+```{r}
+sill = 1
+mean = 0
+nugget = 0
+smooth = 0.5
+scale = 0.1
+
+param=list(smooth=smooth,mean=mean,sill=sill,scale=scale,nugget=nugget) 
+data <- GeoSim(coordx=df2[,1],coordy = df2[,2], corrmodel="Matern", param=param)$data
+```
+
+Luego, se procede a realizar un análisis gráfico:
+
+```{r}
+#quilt.plot(df2[,1], df2[,2], data, xlab="", ylab="", main=paste("Matern",expression(nu),"=",smooth))
+quilt.plot(df2[,1], df2[,2], data)
+
+hist(result)
+boxplot(result)
+```

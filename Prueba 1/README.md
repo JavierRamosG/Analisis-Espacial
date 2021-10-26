@@ -79,6 +79,10 @@ library(GeoModels)
 
     ## Loading required package: shape
 
+``` r
+library(nortest)
+```
+
 ## Pregunta A
 
 ### Desarrollo:
@@ -106,49 +110,90 @@ rownames(df2) <- 1:nrow(df2)
 
 ### Desarrollo:
 
-Primero se realizará la simulación a través del modelo de Matern
+Primero se realizará un análisis gráfico:
 
 ``` r
-sill = 1
-mean = 0
-nugget = 0
-smooth = 0.5
-scale = 0.1
+par(mfrow = c(1,3))
 
-param=list(smooth=smooth,mean=mean,sill=sill,scale=scale,nugget=nugget) 
-data1 <- GeoSim(coordx=df2[,1],coordy = df2[,2], corrmodel="Matern", param=param)$data
+#Histograma
+hist(df2[,3], main = "Histograma", xlab = "Datos",ylab = "Frecuencia")
+
+#Boxplot
+boxplot(df2[,3], main = "Boxplot")
+
+#Gráfico de cuantiles
+qqnorm(df2[,3], pch = 19, col = "gray50", main = "Simetría", xlab = "Cuantiles Teóricos", ylab = "Cuantiles Muestrales")
+qqline(df2[,3])
 ```
 
-Luego, se procede a realizar un análisis gráfico:
+![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- --> En base a lo
+anterior, se puede ver que los datos podrían seguir una distribución
+normal. Ahora bien, para ser más precisos, se realizará un test de
+hipotesis:
 
 ``` r
-#quilt.plot(df2[,1], df2[,2], data1, xlab="", ylab="", main=paste("Matern",expression(nu),"=",smooth))
-quilt.plot(df2[,1], df2[,2], data1)
+lillie.test(df2[,3])
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+    ## 
+    ##  Lilliefors (Kolmogorov-Smirnov) normality test
+    ## 
+    ## data:  df2[, 3]
+    ## D = 0.037552, p-value = 0.002051
 
-``` r
-hist(data1)
-```
-
-![](README_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
-
-``` r
-boxplot(data1, horizontal = TRUE)
-```
-
-![](README_files/figure-gfm/unnamed-chunk-4-3.png)<!-- -->
-
-A partir del boxplot se puede determinar que hay outliers, pero que
-estos son simétricos. Respecto al histograma, claramente hay un
-comportamiento de normalidad y respecto al gráfico de colores no se ve
-con tanta claridad si hay o no una dependencia. Por lo tanto, sí se
-puede decir que el modelo Gaussiano es adecuado.
+El resultado indica que se retiene H0 con un valor-p = 0,002 &lt; 0,05 =
+alpha. Por lo tanto, los datos distribuyen normal y el modelo Gaussiano
+sí es adecuado.
 
 ## Pregunta C
 
 ### Desarrollo:
+
+Primero se calculará la distancia máxima
+
+``` r
+points = cbind(df2[,1], df2[,2])
+maxdist = max(dist(points))
+```
+
+Ahora se procede a realizar el análsis del semivariograma
+
+``` r
+svario = GeoVariogram(coordx = points, data= df2[,3], maxdist = maxdist/2, numbins = 20)
+plot(svario$centers, svario$variograms, ylim = c(0, 1.5))
+```
+
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- --> Para poder
+apreciar mejor la situación, se ampliará el gráfico cerca de cero:
+
+``` r
+svario = GeoVariogram(coordx = points, data= df2[,3], maxdist = 5, numbins = 10)
+plot(svario$centers, svario$variograms, ylim = c(0, 1))
+```
+
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+Análisis de semivariograma en varias direcciones:
+
+``` r
+svario2 = variog4(coords = points, data = df2[,3], max.dist = maxdist/2)
+```
+
+    ## variog: computing variogram for direction = 0 degrees (0 radians)
+    ##         tolerance angle = 22.5 degrees (0.393 radians)
+    ## variog: computing variogram for direction = 45 degrees (0.785 radians)
+    ##         tolerance angle = 22.5 degrees (0.393 radians)
+    ## variog: computing variogram for direction = 90 degrees (1.571 radians)
+    ##         tolerance angle = 22.5 degrees (0.393 radians)
+    ## variog: computing variogram for direction = 135 degrees (2.356 radians)
+    ##         tolerance angle = 22.5 degrees (0.393 radians)
+    ## variog: computing omnidirectional variogram
+
+``` r
+plot(svario2, omni = TRUE)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ## Pregunta D
 
@@ -173,3 +218,37 @@ puede decir que el modelo Gaussiano es adecuado.
 ## Pregunta I
 
 ### Desarrollo:
+
+Primero se realizará la simulación a través del modelo de Matern
+
+``` r
+sill = 1
+mean = 0
+nugget = 0
+smooth = 0.5
+scale = 0.1
+
+param=list(smooth=smooth,mean=mean,sill=sill,scale=scale,nugget=nugget) 
+data <- GeoSim(coordx=df2[,1],coordy = df2[,2], corrmodel="Matern", param=param)$data
+```
+
+Luego, se procede a realizar un análisis gráfico:
+
+``` r
+#quilt.plot(df2[,1], df2[,2], data, xlab="", ylab="", main=paste("Matern",expression(nu),"=",smooth))
+quilt.plot(df2[,1], df2[,2], data)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+``` r
+hist(result)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-10-2.png)<!-- -->
+
+``` r
+boxplot(result)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-10-3.png)<!-- -->

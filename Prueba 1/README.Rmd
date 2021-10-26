@@ -66,7 +66,7 @@ Luego, se procede a realizar un análisis gráfico:
 quilt.plot(df2[,1], df2[,2], data1)
 
 hist(data1)
-boxplot(data1)
+boxplot(data1, horizontal = TRUE)
 ```
 
 A partir del boxplot se puede determinar que hay outliers, pero que estos son simétricos. Respecto al histograma, claramente hay un comportamiento de normalidad y respecto al gráfico de colores no se ve con tanta claridad si hay o no una dependencia. Por lo tanto, sí se puede decir que el modelo Gaussiano es adecuado.

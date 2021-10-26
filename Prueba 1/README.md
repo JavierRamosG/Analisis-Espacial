@@ -135,7 +135,7 @@ hist(data1)
 ![](README_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
 
 ``` r
-boxplot(data1)
+boxplot(data1, horizontal = TRUE)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-4-3.png)<!-- -->

@@ -405,7 +405,8 @@ fit1$claic
     ## [1] 2545.159
 
 Al ver entre ambos casos, se debería escoger primer modelo, es decir, el
-**modelo sin nugget es el mejor**.
+**modelo sin nugget es el mejor**. Sin embargo, cabe destacar que la
+diferencia entre ambos llega a ser ínfima.
 
 ## Pregunta I
 
@@ -428,8 +429,8 @@ GeoQQ(res)
 
 ``` r
 ### computing semivariogram for residuals
-variores = GeoVariogram(data=res$data,coordx=points,maxdist=maxdist/2)
-plot(variores)
+variores = GeoVariogram(data=res$data,coordx=points,maxdist=maxdist/2, numbins = 30)
+plot(variores, ylim = c(0, 1.5))
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->

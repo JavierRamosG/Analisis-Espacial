@@ -1,0 +1,678 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Prueba 1},
+  pdfauthor={Javier Ramos},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Prueba 1}
+\author{Javier Ramos}
+\date{October 27, 2021}
+
+\begin{document}
+\maketitle
+
+\hypertarget{carga-de-datos-y-libreruxedas}{%
+\subsection{Carga de datos y
+librerías}\label{carga-de-datos-y-libreruxedas}}
+
+Se cargará la data y las librerías necesarias para el posterior
+análisis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Dataframe}
+\NormalTok{df }\OtherTok{=} \FunctionTok{read.table}\NormalTok{(}\AttributeTok{file =} \StringTok{"data.txt"}\NormalTok{, }\AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\#Librerías}
+\FunctionTok{library}\NormalTok{(mapproj)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: maps
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(devtools)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: usethis
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(fields)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: spam
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: dotCall64
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: grid
+\end{verbatim}
+
+\begin{verbatim}
+## Spam version 2.7-0 (2021-06-25) is loaded.
+## Type 'help( Spam)' or 'demo( spam)' for a short introduction 
+## and overview of this package.
+## Help for individual functions is also obtained by adding the
+## suffix '.spam' to the function name, e.g. 'help( chol.spam)'.
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'spam'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     backsolve, forwardsolve
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: viridis
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: viridisLite
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'viridis'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:maps':
+## 
+##     unemp
+\end{verbatim}
+
+\begin{verbatim}
+## See https://github.com/NCAR/Fields for
+##  an extensive vignette, other supplements and source code
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(geoR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## --------------------------------------------------------------
+##  Analysis of Geostatistical Data
+##  For an Introduction to geoR go to http://www.leg.ufpr.br/geoR
+##  geoR version 1.8-1 (built on 2020-02-08) is now loaded
+## --------------------------------------------------------------
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(GeoModels)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: GPvecchia
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: plot3D
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: shape
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(nortest)}
+\FunctionTok{require}\NormalTok{(fitdistrplus)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: fitdistrplus
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: MASS
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: survival
+\end{verbatim}
+
+\hypertarget{pregunta-a}{%
+\subsection{Pregunta A}\label{pregunta-a}}
+
+\hypertarget{desarrollo}{%
+\subsubsection{Desarrollo:}\label{desarrollo}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Radio de la tierra}
+\NormalTok{r }\OtherTok{=} \DecValTok{6371}
+
+\CommentTok{\#Separar las columnas de longitud y latitud}
+\NormalTok{x }\OtherTok{=}\NormalTok{ df[,}\DecValTok{1}\NormalTok{]}
+\NormalTok{y }\OtherTok{=}\NormalTok{ df[,}\DecValTok{2}\NormalTok{]}
+
+\CommentTok{\#Se procede a realizar la proyección sinusoidal}
+\NormalTok{prj\_sinusoidal }\OtherTok{=} \FunctionTok{mapproject}\NormalTok{(x, y, }\AttributeTok{projection=}\StringTok{"sinusoidal"}\NormalTok{,}\AttributeTok{orientation=}\FunctionTok{c}\NormalTok{(}\DecValTok{90}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)) }
+\NormalTok{result }\OtherTok{=}\NormalTok{ r}\SpecialCharTok{*}\FunctionTok{cbind}\NormalTok{(prj\_sinusoidal}\SpecialCharTok{$}\NormalTok{x,prj\_sinusoidal}\SpecialCharTok{$}\NormalTok{y)}
+\NormalTok{df2 }\OtherTok{=} \FunctionTok{cbind}\NormalTok{(result, df[,}\DecValTok{3}\NormalTok{])}
+
+\CommentTok{\#Se renombran las filas y las columnas para facilitar la lectura de la tabla}
+\FunctionTok{colnames}\NormalTok{(df2) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"lon"}\NormalTok{, }\StringTok{"lat"}\NormalTok{, }\StringTok{"anom"}\NormalTok{)}
+\FunctionTok{rownames}\NormalTok{(df2) }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(df2)}
+\CommentTok{\#df2}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{pregunta-b}{%
+\subsection{Pregunta B}\label{pregunta-b}}
+
+\hypertarget{desarrollo-1}{%
+\subsubsection{Desarrollo:}\label{desarrollo-1}}
+
+Primero se realizará un análisis gráfico:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+
+\CommentTok{\#Histograma}
+\FunctionTok{hist}\NormalTok{(df2[,}\DecValTok{3}\NormalTok{], }\AttributeTok{main =} \StringTok{"Histograma"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Datos"}\NormalTok{,}\AttributeTok{ylab =} \StringTok{"Frecuencia"}\NormalTok{)}
+
+\CommentTok{\#Boxplot}
+\FunctionTok{boxplot}\NormalTok{(df2[,}\DecValTok{3}\NormalTok{], }\AttributeTok{main =} \StringTok{"Boxplot"}\NormalTok{)}
+
+\CommentTok{\#Gráfico de cuantiles}
+\FunctionTok{qqnorm}\NormalTok{(df2[,}\DecValTok{3}\NormalTok{], }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"gray50"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Simetría"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Cuantiles Teóricos"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Cuantiles Muestrales"}\NormalTok{)}
+\FunctionTok{qqline}\NormalTok{(df2[,}\DecValTok{3}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{README_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+En base a lo anterior, se puede ver que los datos podrían seguir una
+distribución normal. Ahora bien, para ser más precisos, se realizará un
+test de hipotesis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{lillie.test}\NormalTok{(df2[,}\DecValTok{3}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Lilliefors (Kolmogorov-Smirnov) normality test
+## 
+## data:  df2[, 3]
+## D = 0.037552, p-value = 0.002051
+\end{verbatim}
+
+El resultado indica que se retiene H0 con un valor-p = 0,002 \textless{}
+0,05 = alpha. Por lo tanto, los datos distribuyen normal y \textbf{el
+modelo Gaussiano sí es adecuado}.
+
+\hypertarget{pregunta-c}{%
+\subsection{Pregunta C}\label{pregunta-c}}
+
+\hypertarget{desarrollo-2}{%
+\subsubsection{Desarrollo:}\label{desarrollo-2}}
+
+Primero se calculará la distancia máxima
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{points }\OtherTok{=} \FunctionTok{cbind}\NormalTok{(df2[,}\DecValTok{1}\NormalTok{], df2[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{maxdist }\OtherTok{=} \FunctionTok{max}\NormalTok{(}\FunctionTok{dist}\NormalTok{(points))}
+\end{Highlighting}
+\end{Shaded}
+
+Ahora se procede a realizar el análsis del semivariograma
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{svario }\OtherTok{=} \FunctionTok{GeoVariogram}\NormalTok{(}\AttributeTok{coordx =}\NormalTok{ points, }\AttributeTok{data=}\NormalTok{ df2[,}\DecValTok{3}\NormalTok{], }\AttributeTok{maxdist =}\NormalTok{ maxdist}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\AttributeTok{numbins =} \DecValTok{30}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(svario}\SpecialCharTok{$}\NormalTok{centers, svario}\SpecialCharTok{$}\NormalTok{variograms, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{1.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{README_files/figure-latex/unnamed-chunk-6-1.pdf} A
+partir del gráfico se puede ver que tiende a estabilizarse, lo que
+indicaría que hay estacionaridad débil. Ahora bien, a simple vista no se
+puede apreciar si hay un efecto nugget, por lo que para poder apreciar
+mejor la situación, se ampliará el gráfico cerca de cero:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{svario }\OtherTok{=} \FunctionTok{GeoVariogram}\NormalTok{(}\AttributeTok{coordx =}\NormalTok{ points, }\AttributeTok{data=}\NormalTok{ df2[,}\DecValTok{3}\NormalTok{], }\AttributeTok{maxdist =} \DecValTok{10}\NormalTok{, }\AttributeTok{numbins =} \DecValTok{10}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(svario}\SpecialCharTok{$}\NormalTok{centers, svario}\SpecialCharTok{$}\NormalTok{variograms, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{README_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+Por lo que se ve en el gráfico, \textbf{no hay un efecto nugget}. Ahora
+bien, se analizará el semivariograma en distintas direcciones para
+determinar si hay isotropía:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{svario2 }\OtherTok{=} \FunctionTok{variog4}\NormalTok{(}\AttributeTok{coords =}\NormalTok{ points, }\AttributeTok{data =}\NormalTok{ df2[,}\DecValTok{3}\NormalTok{], }\AttributeTok{max.dist =}\NormalTok{ maxdist}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## variog: computing variogram for direction = 0 degrees (0 radians)
+##         tolerance angle = 22.5 degrees (0.393 radians)
+## variog: computing variogram for direction = 45 degrees (0.785 radians)
+##         tolerance angle = 22.5 degrees (0.393 radians)
+## variog: computing variogram for direction = 90 degrees (1.571 radians)
+##         tolerance angle = 22.5 degrees (0.393 radians)
+## variog: computing variogram for direction = 135 degrees (2.356 radians)
+##         tolerance angle = 22.5 degrees (0.393 radians)
+## variog: computing omnidirectional variogram
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(svario2, }\AttributeTok{omni =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{README_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+Al analizar el gráfico, se puede ver que aunque existen variaciones en
+las distintas direcciones, siguen manteniendo el mismo patrón y se
+mueven junto a la línea omnid. Entonces, \textbf{sí hay isotropía}.
+
+\hypertarget{pregunta-d}{%
+\subsection{Pregunta D}\label{pregunta-d}}
+
+\hypertarget{desarrollo-3}{%
+\subsubsection{Desarrollo:}\label{desarrollo-3}}
+
+Si se asume independencia, se tiene lo siguiente:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fitmlind }\OtherTok{=} \FunctionTok{fitdist}\NormalTok{(df2[,}\DecValTok{3}\NormalTok{], }\StringTok{"norm"}\NormalTok{)}
+\NormalTok{fitmlind}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Fitting of the distribution ' norm ' by maximum likelihood 
+## Parameters:
+##        estimate Std. Error
+## mean 0.02597329 0.02720820
+## sd   0.86039892 0.01923899
+\end{verbatim}
+
+Ahora bien, para comprobar que haber asumido la independencia sea
+correcto, se verá gráficamente:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{denscomp}\NormalTok{(fitmlind)}
+\FunctionTok{qqcomp}\NormalTok{(fitmlind)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{README_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+Al ver los gráficos, se puede ver que el modelo está funcionando bien,
+por lo que sí sería correcto asumir independencia. Por lo tanto, la
+\textbf{media es 0,02597} y la \textbf{desviación estándar es 0,86039}
+
+Luego, se realizará otro método para encontrar los valores óptimos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nugget }\OtherTok{=} \DecValTok{0}
+\NormalTok{smooth }\OtherTok{=} \FloatTok{0.5}
+\NormalTok{mean }\OtherTok{=} \DecValTok{0}
+\NormalTok{sill }\OtherTok{=} \DecValTok{1}
+\NormalTok{scale }\OtherTok{=} \FloatTok{0.2}\SpecialCharTok{/}\DecValTok{3}
+\NormalTok{corrmodel }\OtherTok{=} \StringTok{"Matern"}
+\NormalTok{I}\OtherTok{=}\ConstantTok{Inf}
+
+\NormalTok{fixed }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{smooth =}\NormalTok{ smooth, }\AttributeTok{nugget =}\NormalTok{ nugget)}
+\NormalTok{start }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{mean=}\NormalTok{mean, }\AttributeTok{scale=}\NormalTok{scale, }\AttributeTok{sill=}\NormalTok{sill)}
+\NormalTok{lower }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{mean=}\SpecialCharTok{{-}}\NormalTok{I, }\AttributeTok{scale=}\DecValTok{0}\NormalTok{, }\AttributeTok{sill=}\DecValTok{0}\NormalTok{)}
+\NormalTok{upper }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{mean=}\NormalTok{I, }\AttributeTok{scale=}\NormalTok{I, }\AttributeTok{sill=}\NormalTok{I)}
+\NormalTok{fit0  }\OtherTok{\textless{}{-}} \FunctionTok{GeoFit}\NormalTok{(}\AttributeTok{data=}\NormalTok{df[,}\DecValTok{3}\NormalTok{], }\AttributeTok{coordx=}\NormalTok{points, }\AttributeTok{corrmodel=}\NormalTok{corrmodel, }\AttributeTok{neighb=}\DecValTok{3}\NormalTok{,}
+                    \AttributeTok{optimizer=}\StringTok{"nlminb"}\NormalTok{,}\AttributeTok{upper=}\NormalTok{upper,}\AttributeTok{lower=}\NormalTok{lower,}
+                    \AttributeTok{likelihood=}\StringTok{"Full"}\NormalTok{,}\AttributeTok{type=}\StringTok{"Standard"}\NormalTok{, }\AttributeTok{sensitivity=}\ConstantTok{TRUE}\NormalTok{,}
+                    \AttributeTok{start=}\NormalTok{ start, }\AttributeTok{fixed=}\NormalTok{fixed)}
+\FunctionTok{print}\NormalTok{(fit0)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ##################################################################
+## Maximum  Likelihood Fitting of Gaussian Random Fields
+## 
+## Setting: Full Likelihood 
+## 
+## Model: Gaussian 
+## 
+## Type of the likelihood objects: Standard 
+## 
+## Covariance model: Matern 
+## 
+## Optimizer: nlminb 
+## 
+## Number of spatial coordinates: 1000 
+## Number of dependent temporal realisations: 1 
+## Type of the random field: univariate 
+## Number of estimated parameters: 3 
+## 
+## Type of convergence: Successful 
+## Maximum log-Likelihood value: -1268.58
+## AIC : 2543 
+## BIC : 2558 
+## 
+## Estimated parameters:
+##    mean    scale     sill  
+## 0.02597  0.06667  0.74029  
+## 
+## ##################################################################
+\end{verbatim}
+
+Luego, se tiene que la \textbf{media es 0,02597} y la \textbf{varianza
+es 0,74029}. Cabe destacar que el resultado es independiente de la
+dependencia espacial, ya que esta siempre será el valor que se pone de
+partida. Por otro lado, los valores obtenidos son los mismos que los de
+recién (la desviación estándar basta con elevarla al cuadrado y dará el
+mismo resultado que se obtuvo):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fitmlind}\SpecialCharTok{$}\NormalTok{estimate[}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\^{}}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        sd 
+## 0.7402863
+\end{verbatim}
+
+Así se puede ver que el resultado es el mismo.
+
+\hypertarget{pregunta-e}{%
+\subsection{Pregunta E}\label{pregunta-e}}
+
+\hypertarget{desarrollo-4}{%
+\subsubsection{Desarrollo:}\label{desarrollo-4}}
+
+Cuando el parámetro nu es igual a 0.5 ocurre un caso especial en el que
+el modelo de Matern se convierte en el modelo exponencial. Ahora bien,
+este parámetro de suavizamiento lo que indica es cuántas veces es
+diferenciable en media cuadrática el campo aleatorio.
+
+\hypertarget{pregunta-f}{%
+\subsection{Pregunta F}\label{pregunta-f}}
+
+\hypertarget{desarrollo-5}{%
+\subsubsection{Desarrollo:}\label{desarrollo-5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nugget }\OtherTok{=} \DecValTok{0}
+\NormalTok{smooth }\OtherTok{=} \FloatTok{0.5}
+\NormalTok{mean }\OtherTok{=} \DecValTok{0}
+\NormalTok{sill }\OtherTok{=} \DecValTok{1}
+\NormalTok{scale }\OtherTok{=} \FloatTok{0.2}\SpecialCharTok{/}\DecValTok{3}
+\NormalTok{corrmodel }\OtherTok{=} \StringTok{"Matern"}
+\NormalTok{I}\OtherTok{=}\ConstantTok{Inf}
+
+
+\NormalTok{fixed }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{smooth =}\NormalTok{ smooth)}
+\NormalTok{start }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{mean=}\NormalTok{mean, }\AttributeTok{scale=}\NormalTok{scale, }\AttributeTok{sill=}\NormalTok{sill, }\AttributeTok{nugget =}\NormalTok{ nugget)}
+\NormalTok{lower }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{mean=}\SpecialCharTok{{-}}\NormalTok{I, }\AttributeTok{scale=}\DecValTok{0}\NormalTok{, }\AttributeTok{sill=}\DecValTok{0}\NormalTok{, }\AttributeTok{nugget =} \DecValTok{0}\NormalTok{)}
+\NormalTok{upper }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{mean=}\NormalTok{I, }\AttributeTok{scale=}\NormalTok{I, }\AttributeTok{sill=}\NormalTok{I, }\AttributeTok{nugget =}\NormalTok{ I)}
+\NormalTok{fit1  }\OtherTok{\textless{}{-}} \FunctionTok{GeoFit}\NormalTok{(}\AttributeTok{data=}\NormalTok{df[,}\DecValTok{3}\NormalTok{], }\AttributeTok{coordx=}\NormalTok{points, }\AttributeTok{corrmodel=}\NormalTok{corrmodel, }\AttributeTok{neighb=}\DecValTok{3}\NormalTok{,}
+                    \AttributeTok{optimizer=}\StringTok{"nlminb"}\NormalTok{,}\AttributeTok{upper=}\NormalTok{upper,}\AttributeTok{lower=}\NormalTok{lower,}
+                    \AttributeTok{likelihood=}\StringTok{"Full"}\NormalTok{,}\AttributeTok{type=}\StringTok{"Standard"}\NormalTok{, }\AttributeTok{sensitivity=}\ConstantTok{TRUE}\NormalTok{,}
+                    \AttributeTok{start=}\NormalTok{ start, }\AttributeTok{fixed=}\NormalTok{fixed)}
+\FunctionTok{print}\NormalTok{(fit1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ##################################################################
+## Maximum  Likelihood Fitting of Gaussian Random Fields
+## 
+## Setting: Full Likelihood 
+## 
+## Model: Gaussian 
+## 
+## Type of the likelihood objects: Standard 
+## 
+## Covariance model: Matern 
+## 
+## Optimizer: nlminb 
+## 
+## Number of spatial coordinates: 1000 
+## Number of dependent temporal realisations: 1 
+## Type of the random field: univariate 
+## Number of estimated parameters: 4 
+## 
+## Type of convergence: Successful 
+## Maximum log-Likelihood value: -1268.58
+## AIC : 2545 
+## BIC : 2565 
+## 
+## Estimated parameters:
+##    mean   nugget    scale     sill  
+## 0.02597  0.01881  0.06667  0.72147  
+## 
+## ##################################################################
+\end{verbatim}
+
+Los valores encontrados no varían con respecto a lo obtenido en D, y el
+valor del \emph{nugget es 0.01881}
+
+\hypertarget{pregunta-g}{%
+\subsection{Pregunta G}\label{pregunta-g}}
+
+\hypertarget{desarrollo-6}{%
+\subsubsection{Desarrollo:}\label{desarrollo-6}}
+
+Al considerar un nugget no hay continuidad en media cuadrática y,
+además, no hay diferenciabilidad.
+
+\hypertarget{pregunta-h}{%
+\subsection{Pregunta H}\label{pregunta-h}}
+
+\hypertarget{desarrollo-7}{%
+\subsubsection{Desarrollo:}\label{desarrollo-7}}
+
+Al analizar el criterio de Akike se tiene que:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit0}\SpecialCharTok{$}\NormalTok{claic}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2543.159
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit1}\SpecialCharTok{$}\NormalTok{claic}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2545.159
+\end{verbatim}
+
+Al ver entre ambos casos, se debería escoger primer modelo, es decir, el
+\textbf{modelo sin nugget es el mejor}. Sin embargo, cabe destacar que
+la diferencia entre ambos llega a ser ínfima.
+
+\hypertarget{pregunta-i}{%
+\subsection{Pregunta I}\label{pregunta-i}}
+
+\hypertarget{desarrollo-8}{%
+\subsubsection{Desarrollo:}\label{desarrollo-8}}
+
+Se tiene lo siguiente:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\OtherTok{=} \FunctionTok{GeoResiduals}\NormalTok{(fit0)}
+
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{hist}\NormalTok{(res}\SpecialCharTok{$}\NormalTok{data, }\AttributeTok{prob =}\NormalTok{ T, }\AttributeTok{xlab =} \StringTok{"Residuals"}\NormalTok{)}
+\NormalTok{x}\OtherTok{=}\FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\FloatTok{0.1}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(x, }\FunctionTok{dnorm}\NormalTok{(x, }\AttributeTok{mean =} \DecValTok{0}\NormalTok{, }\AttributeTok{sd =} \DecValTok{1}\NormalTok{), }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
+
+\FunctionTok{GeoQQ}\NormalTok{(res)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{README_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# computing semivariogram for residuals}
+\NormalTok{variores }\OtherTok{=} \FunctionTok{GeoVariogram}\NormalTok{(}\AttributeTok{data=}\NormalTok{res}\SpecialCharTok{$}\NormalTok{data,}\AttributeTok{coordx=}\NormalTok{points,}\AttributeTok{maxdist=}\NormalTok{maxdist}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\AttributeTok{numbins =} \DecValTok{30}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(variores, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{1.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{README_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Comparing estimated  semivariogram model versus empirical semivariogram }
+\FunctionTok{GeoCovariogram}\NormalTok{(res,}\AttributeTok{show.vario=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{vario=}\NormalTok{variores,}\AttributeTok{pch=}\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{README_files/figure-latex/unnamed-chunk-16-2.pdf}
+
+\end{document}

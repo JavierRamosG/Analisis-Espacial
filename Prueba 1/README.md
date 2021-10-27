@@ -1,5 +1,7 @@
-Prueba 1 - Javier Ramos
+Prueba 1
 ================
+Javier Ramos
+October 27, 2021
 
 ## Carga de datos y librerías
 

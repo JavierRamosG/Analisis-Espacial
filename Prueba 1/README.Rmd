@@ -1,5 +1,7 @@
 ---
-title: "Prueba 1 - Javier Ramos"
+title: "Prueba 1"
+author: Javier Ramos
+date: October 27, 2021
 output: github_document
 ---
 

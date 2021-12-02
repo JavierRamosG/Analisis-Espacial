@@ -1,0 +1,206 @@
+---
+title: "Prueba 2"
+author: Javier Ramos
+date: November 1, 2021
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Carga de datos y librerías
+
+Se cargará la data y las librerías necesarias para el posterior análisis.
+
+```{r}
+#Dataframe
+raindata = read.table(file = "raindata.txt", header = TRUE)
+alt = read.table(file = "alt.txt", header = TRUE)
+coordstopred = read.table(file = "coordstopred.txt", header = TRUE)
+alt2 = read.table(file = "alt2.txt", header = TRUE)
+
+coords=raindata[,1:2]
+data=raindata[,3]
+
+#Librerías
+library(mapproj)
+library(devtools)
+library(fields)
+library(geoR)
+library(GeoModels)
+library(nortest)
+require(fitdistrplus)
+```
+
+## Pregunta A
+### Desarrollo:
+
+Primero se realizará un análisis gráfico:
+```{r}
+par(mfrow = c(1,4))
+
+#Histograma
+hist(data, main = "Histograma", xlab = "Datos",ylab = "Frecuencia")
+
+#Boxplot
+boxplot(data, main = "Boxplot")
+
+#Gráfico de cuantiles
+qqnorm(data, pch = 19, col = "gray50", main = "Simetría", xlab = "Cuantiles Teóricos", ylab = "Cuantiles Muestrales")
+qqline(data)
+
+fitmlind = fitdist(data, "norm")
+fitmlind
+
+fitmlind$estimate
+fitmlind$loglik
+
+denscomp(fitmlind)
+```
+
+A partir del análisis gáfico se puede ver que los datos distribuyen normal. Esto se confirmará a través de un test de hipótesis:
+
+```{r}
+lillie.test(data)
+```
+El resultado indica que se retiene H0 con un valor-p = 0,00091 < 0,05 = alpha. Por lo tanto, los datos distribuyen normal. Ahora bien, se necesita contexto para poder determinar si es que el modelo Gaussiano es adecuado y, considerendo que en este caso los datos son de intensidad de lluvia, entonces se requiere un soporte positivo, lo que se complica con el modelo Gaussiano ya que este está definido en todo R. Por lo tanto, se concluye que *el modelo no es adecuado* para este caso
+
+
+## Pregunta B
+### Desarrollo:
+
+Primero se calculará la distancia máxima
+```{r}
+maxdist = max(dist(coords))
+```
+
+Ahora se procede a realizar el análsis del semivariograma
+```{r}
+par(mfrow = c(1,2))
+svario = GeoVariogram(coordx = coords, data= data, maxdist = maxdist, numbins = 30)
+plot(svario$centers, svario$variograms, ylim = c(0, 1.5))
+
+svario2 = variog4(coords = coords, data = data, max.dist = maxdist)
+plot(svario2, omni = TRUE)
+```
+
+Se puede ver que al final del gráfico que explotan las distintas direcciones, por lo que *no hay isotropía*.
+
+## Pregunta C
+### Desarrollo:
+
+No es débilmente estacionario, ya que la varianza depende de la media y esta última es espacialemente variable. Además, esto se confirma con la preguna B, en donde el primer gráfico muestra que los puntos no logran estabilizarse.
+
+## Pregunta D
+### Desarrollo:
+
+Se tiene que los parámetros para el caso log-Gaussiano son:
+
+```{r}
+I=Inf
+nugget = 0
+smooth = 0.5
+scale = 0.3
+corrmodel = "Matern"
+model = "LogGaussian"
+X = cbind(alt[,1],alt[,2])
+
+fixed<-list(smooth=0.5,nugget=0)
+start<-list(mean=mean(data), mean1 = mean(data),scale=scale,sill=var(data))
+lower=list(mean=-I, mean1 = -I, sill = 0,scale=0)
+upper=list(mean= I, mean1 = I, sill = I,scale=I)
+fit1 <- GeoFit(data=data,coordx=coords,corrmodel=corrmodel,
+                    model = model,X = X,
+                    likelihood="Conditional",type="Pairwise",
+                    start=start, lower = lower, upper = upper,fixed=fixed, neighb = 4)
+print(fit1)
+```
+
+Se tiene que los parámetros para el caso Weibull son:
+```{r}
+mean(data)
+```
+
+
+```{r}
+I=Inf
+nugget = 0
+shape = 0
+smooth = 0.5
+scale = 0.3
+corrmodel = "Matern"
+model2 = "Weibull"
+X = cbind(alt[,1],alt[,2])
+
+fixed<-list(smooth=0.5,nugget=0, sill = var(data))
+start<-list(mean=mean(data), mean1 = mean(data), scale=scale, shape=shape)
+lower=list(mean=-I, mean1 = -I,scale=0, shape=0)
+upper=list(mean= I, mean1 = I,scale=I, shape=I)
+fit2 <- GeoFit(data=data,coordx=coords,corrmodel= corrmodel,
+                    model = model2,X = X,
+                    likelihood="Conditional",type="Pairwise",lower = lower, upper = upper,
+                    start=start,fixed=fixed, neighb = 4)
+print(fit2)
+```
+
+
+
+## Pregunta E
+### Desarrollo:
+
+Se tiene que:
+
+```{r}
+cv1=GeoCV(fit1, K=100, estimation=TRUE, n.fold=0.15,local=TRUE,neighb=4,seed=8)
+mean(cv1$rmse)
+```
+```{r}
+cv1=GeoCV(fit2, K=100, estimation=TRUE, n.fold=0.15,local=TRUE,neighb=4,seed=8)
+mean(cv1$rmse)
+```
+Por tanto, el mejor modelo de Weibull
+
+## Pregunta F
+### Desarrollo:
+
+Se tiene que:
+```{r}
+res1=GeoResiduals(fit2)
+v1 = GeoVariogram(data=res2$data,coordx = coords, maxdist = maxdist/4)
+
+par(mfrow = c(1,2))
+GeoQQ(res2)
+GeoCovariogram(res2,show.vario=TRUE,vario=v1,pch=20)
+
+```
+
+
+## Pregunta G
+### Desarrollo:
+
+Se tiene que:
+```{r}
+loc_to_pred = as.matrix(coordstopred)
+Nloc = nrow(loc_to_pred)
+Xloc = cbind(alt2[,1], alt2[,2])
+param_est = as.list(c(fit2$param, fit2$fixed))
+pr = GeoKrig(data = data, loc = loc_to_pred, coordx = coords, corrmodel = corrmodel,model = model2,param = param_est, X=X, Xloc=Xloc, mse=TRUE, sparse = TRUE)
+```
+
+```{r}
+colour = rainbow(100)
+par(mfrow=c(1,3))
+
+##Data
+quilt.plot(coords,data,col=colour,zlim=c(-4,4), main="Data")
+
+#Kriging
+quilt.plot(loc_to_pred,pr$pred,col=colour,zlim=c(-4,4),
+          xlab="",ylab="",main=" Kriging ")
+
+#MSE
+quilt.plot(loc_to_pred,pr$mse,col=colour,
+          xlab="",ylab="",main="MSE")
+```
+
+

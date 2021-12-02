@@ -45,9 +45,6 @@ hist(data, main = "Histograma", xlab = "Datos",ylab = "Frecuencia")
 #Boxplot
 boxplot(data, main = "Boxplot")
 
-#Gráfico de cuantiles
-qqnorm(data, pch = 19, col = "gray50", main = "Simetría", xlab = "Cuantiles Teóricos", ylab = "Cuantiles Muestrales")
-qqline(data)
 
 fitmlind = fitdist(data, "norm")
 fitmlind
@@ -56,6 +53,7 @@ fitmlind$estimate
 fitmlind$loglik
 
 denscomp(fitmlind)
+qqcomp(fitmlind)
 ```
 
 A partir del análisis gáfico se puede ver que los datos distribuyen normal. Esto se confirmará a través de un test de hipótesis:
@@ -72,12 +70,13 @@ El resultado indica que se retiene H0 con un valor-p = 0,00091 < 0,05 = alpha. P
 Primero se calculará la distancia máxima
 ```{r}
 maxdist = max(dist(coords))
+maxdist
 ```
 
 Ahora se procede a realizar el análsis del semivariograma
 ```{r}
 svario = GeoVariogram(coordx = coords, data= data, maxdist = maxdist/2, numbins = 30)
-plot(svario$centers, svario$variograms, ylim = c(0, 1.5))
+plot(svario$centers, svario$variograms, ylim = c(0, 0.5))
 ```
 
 
@@ -85,7 +84,7 @@ A simple vista se ve estabilidad y, además, la posible presencia de un nugget. 
 
 ```{r}
 svario = GeoVariogram(coordx = coords, data= data, maxdist = 10, numbins = 30)
-plot(svario$centers, svario$variograms, ylim = c(0, 1.5))
+plot(svario$centers, svario$variograms, ylim = c(0, 0.5))
 ```
 
 
@@ -107,7 +106,7 @@ svario3 = GeoVariogram(coordx = coords, data= data, maxdist = maxdist, numbins =
 svario4 = variog4(coords = coords, data = data, max.dist = maxdist)
 
 par(mfrow = c(1,2))
-plot(svario3$centers, svario3$variograms, ylim = c(0, 1.5))
+plot(svario3$centers, svario3$variograms, ylim = c(0, 0.6))
 plot(svario4, omni = TRUE)
 
 ```

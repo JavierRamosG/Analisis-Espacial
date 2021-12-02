@@ -113,9 +113,6 @@ hist(data, main = "Histograma", xlab = "Datos",ylab = "Frecuencia")
 #Boxplot
 boxplot(data, main = "Boxplot")
 
-#Gráfico de cuantiles
-qqnorm(data, pch = 19, col = "gray50", main = "Simetría", xlab = "Cuantiles Teóricos", ylab = "Cuantiles Muestrales")
-qqline(data)
 
 fitmlind = fitdist(data, "norm")
 fitmlind
@@ -142,6 +139,7 @@ fitmlind$loglik
 
 ``` r
 denscomp(fitmlind)
+qqcomp(fitmlind)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
@@ -175,13 +173,16 @@ Primero se calculará la distancia máxima
 
 ``` r
 maxdist = max(dist(coords))
+maxdist
 ```
+
+    ## [1] 198.0506
 
 Ahora se procede a realizar el análsis del semivariograma
 
 ``` r
 svario = GeoVariogram(coordx = coords, data= data, maxdist = maxdist/2, numbins = 30)
-plot(svario$centers, svario$variograms, ylim = c(0, 1.5))
+plot(svario$centers, svario$variograms, ylim = c(0, 0.5))
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
@@ -192,7 +193,7 @@ al cero para poder determinar si hay un nugget o no:
 
 ``` r
 svario = GeoVariogram(coordx = coords, data= data, maxdist = 10, numbins = 30)
-plot(svario$centers, svario$variograms, ylim = c(0, 1.5))
+plot(svario$centers, svario$variograms, ylim = c(0, 0.5))
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
@@ -250,7 +251,7 @@ svario4 = variog4(coords = coords, data = data, max.dist = maxdist)
 
 ``` r
 par(mfrow = c(1,2))
-plot(svario3$centers, svario3$variograms, ylim = c(0, 1.5))
+plot(svario3$centers, svario3$variograms, ylim = c(0, 0.6))
 plot(svario4, omni = TRUE)
 ```
 
